@@ -1,6 +1,6 @@
 # Coil Counter - Electronic Coil Winding Counter
 
-![Device Photo](img/5.jpg)
+![Device Photo](img/4.jpg)
 
 ## 📋 Project Description
 
@@ -24,14 +24,13 @@ Electronic coil winding counter based on Raspberry Pi Pico microcontroller with 
 | ![3D Model 1](img/1.jpg) | ![PCB Front](img/6.jpg) |
 | ![3D Model 2](img/2.jpg) | ![PCB Back](img/7.jpg) |
 | ![3D Model 3](img/3.jpg) | ![Working Device](img/5.jpg) |
-| ![3D Model 4](img/4.jpg) | |
 
 ## 🛠 Hardware Platform
 
 ### Microcontroller
 - **Raspberry Pi Pico** (RP2040)
 - Clock frequency: 300 MHz
-- Framework: Arduino
+- Framework: Platformio
 
 ### Display
 - **Waveshare RP2040 1.28" Round LCD**
@@ -43,7 +42,7 @@ Electronic coil winding counter based on Raspberry Pi Pico microcontroller with 
 
 ### DC-DC Converter
 - **SX1308** step-up converter
-- Input: 3.7V (battery)
+- Input: 3.7V (li-ion battery)
 - Output: 6.6V (encoder power)
 - Enable control via GPIO
 
@@ -118,14 +117,12 @@ The graphical user interface is created using **SquareLine Studio** - a professi
 
 ### 2. TARGET Mode (ENCODER_MODE_TARGET)
 - Set target turn count using on-board encoder
-- Audio signal when target is reached
-- Visual indication of progress
 
 ### 3. MANUAL Mode (ENCODER_MODE_HAND)
 - Manual counter adjustment using on-board encoder
 - Useful for corrections
 
-#### 4. Sleep
+### 4. Sleep
 - Backlight off
 - DC\DC off
 
@@ -233,10 +230,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 👨‍💻 Author
-
-Developed for precision coil winding applications using modern embedded systems technology.
 
 ## 🙏 Acknowledgments
 
