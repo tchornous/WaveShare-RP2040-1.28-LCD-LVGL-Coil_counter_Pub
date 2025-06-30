@@ -64,7 +64,4 @@ extern void control_buzzer_beep(void);
 void enter_sleep_mode(void);
 void exit_sleep_mode(void);
 
-//extern bool    F_vin_5v;
-//extern bool F_sleep_mode;
-
 #endif // H_CONTROL

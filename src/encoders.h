@@ -4,7 +4,6 @@
 #include "hardware/gpio.h"
 
 // Pin definitions
-
 #define ENCODER_CLK        19 
 #define ENCODER_DT         18 
 #define COUNT_ENCODER_DT   22

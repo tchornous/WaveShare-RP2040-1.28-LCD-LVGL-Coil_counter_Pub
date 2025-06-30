@@ -36,7 +36,7 @@ Electronic coil winding counter based on Raspberry Pi Pico microcontroller with 
 - **Waveshare RP2040 1.28" Round LCD**
 - Resolution: 240x240 pixels
 - Driver: GC9A01
-- Interface: SPI (40 MHz)
+- Interface: SPI (60 MHz)
 - Backlight: PWM control
 - **Double buffering with DMA** for smooth graphics
 
@@ -128,7 +128,7 @@ The graphical user interface is created using **SquareLine Studio** - a professi
 
 ## 🔋 Power Management
 
-- **Automatic sleep mode** after 60 seconds of inactivity
+- **Automatic sleep mode** after 180 seconds of inactivity
 - **Display and DC-DC shutdown** in sleep mode
 - **External power monitoring** (USB 5V detection)
 - **Battery voltage measurement** with on-screen indication
@@ -141,18 +141,18 @@ The graphical user interface is created using **SquareLine Studio** - a professi
 - **Long press** (500ms): Switch to MANUAL mode
 
 ### Reset Button
-- **Short press**: Reset turn counter to zero
-- **Long press**: Reserved for future functions
+- **Short press**: Reserved for future functions
+- **Long press**: Reset turn counter to zero
 
 ## 📊 Technical Specifications
 
 - **External encoder resolution**: 100 pulses per revolution 
 - **On-board encoder resolution**: 20 pulses per revolution
-- **Display update rate**: ~40 FPS (5ms)
+- **Display update rate**: ~50 FPS in idle
 - **Button polling rate**: (5ms)
 - **Activity check rate**: (50ms)
 - **Battery update rate**: (1s)
-- **Sleep timeout**: 60 seconds
+- **Sleep timeout**: 180 seconds
 - **Double buffering**: Enabled for smooth animations
 
 ## 🔧 Building the Project
@@ -177,8 +177,8 @@ pio run --target clean
 Display settings are configured in `platformio.ini`:
 - Driver: GC9A01_DRIVER
 - Resolution: 240x240
-- SPI frequency: 40 MHz
-- DMA buffer: 4096 bytes
+- SPI frequency: 60 MHz
+- DMA buffer: 16384 bytes
 - Double buffering: Enabled
 
 ## 📁 Project Structure

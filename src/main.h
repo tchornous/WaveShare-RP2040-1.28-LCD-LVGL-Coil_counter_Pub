@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <Arduino.h> //needs to TFT_eSPI library
+#include <Arduino.h> // needs to TFT_eSPI library
 
 #include <lvgl.h>
 #include <TFT_eSPI.h>
@@ -10,7 +10,7 @@
 
 
 #define START_TARGET_VALUE 25
-#define SLEEP_TIMEOUT 60000 // 60 seconds
+#define SLEEP_TIMEOUT 180000 // 3min
 
 typedef void (*task_func_t)(void);
 

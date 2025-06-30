@@ -69,9 +69,10 @@ void display_init(void) {
 void display_bat_stat(void){
 
     static float old_bat_vol;
+    static bool old_vbat_state;
     static float bat_vol = battery_measurement();
 
-    if(bat_vol != old_bat_vol){
+    if(bat_vol != old_bat_vol || activity.current_vbus_state != old_vbat_state){
         //half more battery
         if(bat_vol > 4.0){
             lv_obj_update_flag(ui_Image7, LV_OBJ_FLAG_HIDDEN,0);
@@ -94,15 +95,17 @@ void display_bat_stat(void){
             pico_analogWrite(TFT_BL, 50); 
         }
         // full batttery
-        if(bat_vol >= 4.2 || activity.F_vin_5v){
+        if(bat_vol >= 4.2 || activity.current_vbus_state){
             pico_analogWrite(TFT_BL, 255);
             lv_obj_update_flag(ui_Image2, LV_OBJ_FLAG_HIDDEN,0);
             lv_obj_update_flag(ui_Image3, LV_OBJ_FLAG_HIDDEN,1);
-        }else{
+        }
+        else if(!activity.current_vbus_state){
             lv_obj_update_flag(ui_Image2, LV_OBJ_FLAG_HIDDEN,1);
             lv_obj_update_flag(ui_Image3, LV_OBJ_FLAG_HIDDEN,0);
         }
     old_bat_vol = bat_vol;
+    old_vbat_state = activity.current_vbus_state;
     } 
 }
 

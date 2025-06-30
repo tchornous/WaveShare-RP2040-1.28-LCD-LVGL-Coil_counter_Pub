@@ -34,8 +34,7 @@ int main(){
 
     while (1){
         sheduler_run();
-
         lv_timer_handler();
-        sleep_ms(1);
+        sleep_ms(5);
     }
 }

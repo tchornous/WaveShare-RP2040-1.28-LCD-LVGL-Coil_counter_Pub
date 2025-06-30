@@ -45,6 +45,7 @@ void control_init()
     // Set initial states for buttons
     encoder_button.prev_state = gpio_get(ENCODER_BUTTON_PIN);
     reset_button.prev_state   = gpio_get(  RESET_BUTTON_PIN);
+    
 }
 
 void pico_analogWrite(uint pin, uint8_t value) {
@@ -70,7 +71,7 @@ void button_update(button_t* btn) {
         btn->short_press = false;
         btn->long_press = false;
         btn->Fupdate = false;
-        activity.F_sleep_mode = false; // reset sleep mode flag on button press
+        // activity.F_sleep_mode = false; // reset sleep mode flag on button press
     }
     if (state && !btn->prev_state && btn->flag) { // release
         uint32_t dt = current_time_btn - btn->press_time;
@@ -92,10 +93,9 @@ void control_update(){
 //    NEED TO BE CALLED BEFORE display_update() because it drop encoder update flag
 //        --------------------------------------------------------------------
 
-    //button state update
+    // button state update
     button_update(&encoder_button);
     if(encoder_button.Fupdate){
-
         if(encoder_button.long_press){
             if      (hand_encoder.mode == ENCODER_MODE_OFF)   {hand_encoder.mode = ENCODER_MODE_HAND;}
             else if (hand_encoder.mode == ENCODER_MODE_HAND)  {hand_encoder.mode = ENCODER_MODE_OFF;}
@@ -116,12 +116,12 @@ void control_update(){
 
     if(reset_button.Fupdate)
     {
-        if(reset_button.long_press){         // long click
+        if(reset_button.long_press){        // long click
+            counter_encoder.counter = 0;    // reset counter + display update
+            counter_encoder.Fupdate = 1;
             reset_button.long_press = false;
         }   
         if(reset_button.short_press){       // short click    
-            counter_encoder.counter = 0;    // reset counter + display update
-            counter_encoder.Fupdate = 1;
             reset_button.short_press = false;
         }
     }
@@ -153,10 +153,17 @@ void control_check_activity(void){
             activity.F_vin_5v    = true;
             activity.F_sleep_mode = false;
         }
-
+        // exit sleep plug in usb
         else if(!activity.current_vbus_state && activity.F_vin_5v){
             activity.F_vin_5v        = false;
             activity.last_activity_ms = curent_time_activity;
+        }
+        // exit sleep with buttons
+        if(is_sleep_mode) {
+            if(!gpio_get(ENCODER_BUTTON_PIN) || !gpio_get(RESET_BUTTON_PIN)) {
+                activity.F_sleep_mode = false;
+                activity.last_activity_ms = curent_time_activity;
+            }
         }
 
         if(!activity.F_sleep_mode && !activity.F_vin_5v &&  \
